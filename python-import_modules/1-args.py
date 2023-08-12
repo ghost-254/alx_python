@@ -5,7 +5,7 @@ def print_arguments(argv):
     num_arguments = len(argv)
 
     if num_arguments == 0:
-        print("0 argument:")
+        print("0 arguments.")
         print("0:")
         return
     
