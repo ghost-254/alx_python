@@ -6,7 +6,6 @@ def print_arguments(argv):
 
     if num_arguments == 0:
         print("0 arguments.")
-        print("0:")
         return
     
     if num_arguments == 1:
