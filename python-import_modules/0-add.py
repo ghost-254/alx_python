@@ -6,5 +6,5 @@ if __name__ == "__main__":
 
     exec(open("add_0.py").read())
 
-    result = (a + b)
+    result = add(a, b)
     print("{} + {} = {}".format(a, b, result))
