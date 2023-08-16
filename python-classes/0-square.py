@@ -1,54 +1,58 @@
 #!/usr/bin/python3
+"""
+0-square.py
+A module that defines a Square class for working with squares.
+"""
+
 class Square:
     """
-    This class defines a square by its size.
+    A class that defines a square based on a given size.
 
     Attributes:
         __size (int): The size of the square's sides.
-
-    Methods:
-        get_size(): Returns the size of the square.
-        set_size(new_size): Sets the size of the square (non-negative).
-        __str__(): Returns a string representation of the square.
     """
+
     def __init__(self, size):
         """
-        Initializes a new Square instance with the given size.
+        Initializes a Square instance with the given size.
 
         Args:
             size (int): The size of the square's sides.
         """
         self.__size = size
-    
+
+    def area(self):
+        """
+        Calculates the area of the square.
+
+        Returns:
+            int: The area of the square.
+        """
+        return self.__size ** 2
+
+    def perimeter(self):
+        """
+        Calculates the perimeter of the square.
+
+        Returns:
+            int: The perimeter of the square.
+        """
+        return 4 * self.__size
+
     def get_size(self):
         """
-        Returns the size of the square.
+        Gets the size of the square.
 
         Returns:
-            int: The size of the square's sides.
+            int: The size of the square.
         """
         return self.__size
-    
-    def set_size(self, new_size):
+
+    def set_size(self, size):
         """
-        Sets the size of the square.
+        Sets the size of the square to the given value.
 
         Args:
-            new_size (int): The new size of the square's sides.
-
-        Raises:
-            ValueError: If the new size is negative.
+            size (int): The new size for the square's sides.
         """
-        if new_size >= 0:
-            self.__size = new_size
-        else:
-            raise ValueError("Size cannot be negative")
-    
-    def __str__(self):
-        """
-        Returns a string representation of the square.
-
-        Returns:
-            str: A string describing the square.
-        """
-        return f"Square with side length {self.__size}"
+        self.__size = size
