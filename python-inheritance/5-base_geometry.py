@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """
-5-base_geometry_module.py
+5-base_geometry.py
 A module that defines the BaseGeometry class for representing a base geometry.
 """
 
