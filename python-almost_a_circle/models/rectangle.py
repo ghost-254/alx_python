@@ -39,7 +39,7 @@ class Rectangle(Base):
         if not isinstance(value, int):
             raise TypeError("width must be an integer")
         if value <= 0:
-            raise ValueError("width must be greater than 0")
+            raise ValueError("width must be > 0")
         self.__width = value
 
     @property
@@ -53,7 +53,7 @@ class Rectangle(Base):
         if not isinstance(value, int):
             raise TypeError("height must be an integer")
         if value <= 0:
-            raise ValueError("height must be greater than 0")
+            raise ValueError("height must be > 0")
         self.__height = value
 
     @property
@@ -66,6 +66,8 @@ class Rectangle(Base):
         """Setter for x."""
         if not isinstance(value, int):
             raise TypeError("x must be an integer")
+        if value < 0:
+            raise ValueError("x must be >= 0")
         self.__x = value
 
     @property
@@ -78,4 +80,46 @@ class Rectangle(Base):
         """Setter for y."""
         if not isinstance(value, int):
             raise TypeError("y must be an integer")
+        if value < 0:
+            raise ValueError("y must be >= 0")
         self.__y = value
+
+    def area(self):
+        """Calculate and return the area of the rectangle."""
+        return self.width * self.height
+
+    def display(self):
+        """Display the Rectangle instance using '#' characters, accounting for x and y."""
+        for _ in range(self.y):
+            print()
+        for _ in range(self.height):
+            print(' ' * self.x + '#' * self.width)
+
+    def __str__(self):
+        """Override __str__ method to return formatted string."""
+        return f"[Rectangle] ({self.id}) {self.x}/{self.y} - {self.width}/{self.height}"
+
+    def update(self, *args, **kwargs):
+        """
+        Update the attributes of the Rectangle instance based on provided arguments.
+
+        Args:
+            *args: Positional arguments in the order id, width, height, x, y.
+            **kwargs: Keyword arguments corresponding to attributes.
+        """
+        num_args = len(args)
+        if num_args >= 1:
+            self.id = args[0]
+        if num_args >= 2:
+            self.width = args[1]
+        if num_args >= 3:
+            self.height = args[2]
+        if num_args >= 4:
+            self.x = args[3]
+        if num_args >= 5:
+            self.y = args[4]
+
+        if not args or len(args) < 5:
+            for key, value in kwargs.items():
+                setattr(self, key, value)
+
