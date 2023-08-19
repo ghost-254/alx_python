@@ -14,9 +14,9 @@ def get_github_id(username, token):
     
     if response.status_code == 200:
         user_data = response.json()
-        print("GitHub user ID:", user_data['id'])
+        print(user_data['id'])
     else:
-        print("Failed to fetch GitHub data. Status code:", response.status_code)
+        print("None")
 
 if __name__ == "__main__":
     username = sys.argv[1]
