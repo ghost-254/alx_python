@@ -13,6 +13,25 @@ Base = declarative_base()
 
 # Define the State class
 class State(Base):
+    """Represents a state in a database table.
+
+    This class defines the structure of a 'states' table in a MySQL database.
+    It includes two attributes:
+    - id (int): An auto-generated unique identifier for the state.
+    - name (str): The name of the state with a maximum length of 128 characters.
+
+    Attributes:
+        __tablename__ (str): The name of the database table associated with this class.
+        id (Column): An integer column representing the primary key of the state.
+        name (Column): A string column representing the name of the state.
+
+    Args:
+        Base (declarative_base): The SQLAlchemy declarative base instance to inherit from.
+
+    Note:
+        All instances of this class are expected to be stored in a 'states' table in the database.
+    """
+
     __tablename__ = 'states'
     id = Column(Integer, primary_key=True, nullable=False, autoincrement=True)
     name = Column(String(128), nullable=False)
