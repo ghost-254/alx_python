@@ -5,7 +5,7 @@ if __name__ == "__main__":
     # Check if the correct number of command-line arguments is provided
     if len(sys.argv) != 5:
         print(
-            "Usage: python 2-my_filter_states.py <username> <password> <database> <state_name>"
+            "Usage: python filter_states.py <username> <password> <database> <state_name>"
         )
         sys.exit(1)
 
@@ -29,7 +29,7 @@ if __name__ == "__main__":
     cursor = db.cursor()
 
     # Execute the SQL query to fetch states where the name matches the provided state_name
-    query = "SELECT * FROM states WHERE name = %s ORDER BY id ASC"
+    query = "SELECT * FROM states WHERE UPPER(name) = UPPER(%s) ORDER BY id ASC"
     cursor.execute(query, (state_name,))
 
     # Fetch all rows from the result set
