@@ -4,7 +4,9 @@ import sys
 if __name__ == "__main__":
     # Check if the correct number of command-line arguments is provided
     if len(sys.argv) != 4:
-        print("Usage: python 1-filter_states.py <username> <password> <database>")
+        print(
+            "Usage: python 1-filter_states.py <username> <password> <database>"
+        )
         sys.exit(1)
 
     # Get the command-line arguments
@@ -37,7 +39,7 @@ if __name__ == "__main__":
     for row in rows:
         state_id, state_name = row
         print("({}, '{}')".format(state_id, state_name))
-        
+
     # Close the cursor and database connection
     cursor.close()
     db.close()
