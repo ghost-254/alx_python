@@ -29,7 +29,7 @@ if __name__ == "__main__":
 
     # Execute the SQL query to fetch states starting with 'N' and order by id
     cursor.execute(
-        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+        "SELECT * FROM states WHERE name REGEXP '^N%' ORDER BY id ASC"
     )
 
     # Fetch all rows from the result set
