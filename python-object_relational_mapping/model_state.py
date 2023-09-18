@@ -1,4 +1,8 @@
 #!/usr/bin/python3
+"""
+model_state.py:
+Define the State class and create the corresponding table in a MySQL database.
+"""
 import sys
 from sqlalchemy import create_engine, Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
