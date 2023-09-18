@@ -31,8 +31,7 @@ if __name__ == "__main__":
 
     # SQL-query to fetch states where the name matches the provided state_name
     query = (
-        "SELECT * FROM states WHERE name = %s OR BINARY name = %s "
-        "ORDER BY id ASC"
+        "SELECT * FROM states WHERE UPPER(name) = UPPER(%s) ORDER BY id ASC"
     )
     cursor.execute(query, (state_name,))
 
