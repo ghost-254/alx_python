@@ -26,15 +26,18 @@ if __name__ == "__main__":
     cursor = db.cursor()
 
     # Execute the SQL query to fetch states starting with 'N' and order by id
-    cursor.execute("SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC")
+    cursor.execute(
+        "SELECT * FROM states WHERE name LIKE 'N%' ORDER BY id ASC"
+    )
 
     # Fetch all rows from the result set
     rows = cursor.fetchall()
 
     # Display the results
     for row in rows:
-        print(row)
-
+        state_id, state_name = row
+        print("({}, '{}')".format(state_id, state_name))
+        
     # Close the cursor and database connection
     cursor.close()
     db.close()
