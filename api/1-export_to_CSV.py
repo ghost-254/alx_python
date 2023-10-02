@@ -1,60 +1,44 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 """
-Exports data to CSV
+This script retrieves TODO list data for a given employee ID using the JSONPlaceholder REST API
+and exports it to a CSV file.
 """
 
 import csv
 import requests
 import sys
 
-def get_employee_todo_progress(employee_id):
-    base_url = 'https://jsonplaceholder.typicode.com'
-    user_url = f'{base_url}/users/{employee_id}'
-    todos_url = f'{base_url}/todos?userId={employee_id}'
+def gather_data(employee_id):
+    """
+    Retrieve TODO list data for the given employee ID.
+    """
+    base_url = "https://jsonplaceholder.typicode.com"
 
-    try:
-        user_response = requests.get(user_url)
-        user_data = user_response.json()
+    # Fetchich employee details
+    employee_response = requests.get(f"{base_url}/users/{employee_id}")
+    employee_data = employee_response.json()
+    user_id = employee_data.get("id")
+    username = employee_data.get("username")
+
+    # Fetching TODO list for the employee
+    todo_response = requests.get(f"{base_url}/todos?userId={employee_id}")
+    todo_list = todo_response.json()
+
+    # Exporting TODO list data to a CSV file
+    csv_file_name = f"{user_id}.csv"
+    with open(csv_file_name, mode='w', newline='') as csv_file:
+        csv_writer = csv.writer(csv_file, quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow(["USER_ID", "USERNAME", "TASK_COMPLETED_STATUS", "TASK_TITLE"])
         
-        todos_response = requests.get(todos_url)
-        todos_data = todos_response.json()
+        for task in todo_list:
+            csv_writer.writerow([user_id, username, task.get("completed"), task.get("title")])
 
-        employee_name = user_data.get('name')
-        user_id = user_data.get('id')
+    print(f"Data has been exported to {csv_file_name}")
 
-        # Defining the CSV file name based on the user ID
-        csv_file_name = f'{user_id}.csv'
-
-        # Creating and opening the CSV file for writing
-        with open(csv_file_name, 'w', newline='') as csvfile:
-            fieldnames = ['USER_ID', 'USERNAME', 'TASK_COMPLETED_STATUS', 'TASK_TITLE']
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            
-            # Writing the header row
-            writer.writeheader()
-
-            for task in todos_data:
-                # Checking if the task is completed
-                task_completed = 'True' if task.get('completed') else 'False'
-
-                # Writing task data to the CSV file
-                writer.writerow({
-                    'USER_ID': user_id,
-                    'USERNAME': employee_name,
-                    'TASK_COMPLETED_STATUS': task_completed,
-                    'TASK_TITLE': task.get('title')
-                })
-
-        print(f'Data exported to {csv_file_name}')
-
-    except requests.exceptions.RequestException as e:
-        print(f'Error: {e}')
-        sys.exit(1)
-
-if __name__ == '__main__':
+if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print('Usage: python3 1-export_to_CSV.py <employee_id>')
+        print("Usage: python3 1-export_to_CSV.py <employee_id>")
         sys.exit(1)
 
     employee_id = int(sys.argv[1])
-    get_employee_todo_progress(employee_id)
+    gather_data(employee_id)
