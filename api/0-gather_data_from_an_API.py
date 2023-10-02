@@ -26,7 +26,7 @@ def get_employee_todo_progress(employee_id):
         
         for task in todos_data:
             if task.get('completed'):
-                print('\t' + task.get('title'))
+                print(f'\t{task.get("title")} \n')
 
     except requests.exceptions.RequestException as e:
         print(f'Error: {e}')
