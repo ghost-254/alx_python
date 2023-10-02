@@ -3,9 +3,9 @@
 Exports data to CSV
 """
 
+import csv
 import requests
 import sys
-import csv
 
 def get_employee_todo_progress(employee_id):
     base_url = 'https://jsonplaceholder.typicode.com'
